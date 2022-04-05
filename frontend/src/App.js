@@ -6,9 +6,9 @@ import Login from "./Containers/Login";
 
 function App() {
     return (
-        <>
+        <div className="bg-gray-100">
             <Home />
-        </>
+        </div>
     );
 }
 

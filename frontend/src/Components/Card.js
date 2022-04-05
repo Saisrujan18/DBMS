@@ -2,18 +2,18 @@ import React from "react";
 
 function Card() {
     return (
-        <div className="my-10 flex max-w-md mx-auto overflow-hidden bg-white rounded-md shadow-md ">
+        <div className="px-1 flex max-w-sm  mx-auto overflow-hidden bg-white rounded-md shadow-md">
             <div
                 className="w-1/3 bg-cover"
                 styles={{"background-image": 'https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80'}}
             ></div>
 
-            <div className="w-2/3 p-4 md:p-4">
+            <div className="w-2/3 p-2 md:p-3">
                 <h1 className="text-2xl font-bold text-gray-800 ">
                     Backpack
                 </h1>
 
-                <p className="mt-2 text-sm text-gray-600">
+                <p className="mt-1 text-sm text-gray-600">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit In
                     odit
                 </p>
