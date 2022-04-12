@@ -1,6 +1,7 @@
 import React from "react";
 
-function Card() {
+function Card()
+{
     return (
         <div className="px-1 flex max-w-sm  mx-auto overflow-hidden bg-white rounded-md shadow-md">
             <div

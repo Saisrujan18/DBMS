@@ -1,6 +1,7 @@
 import React from "react";
 
 function Navbar() {
+    
     return (
         <nav className="bg-white shadow text-black">
             <div className="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
@@ -58,6 +59,12 @@ function Navbar() {
                             href="#"
                         >
                             About
+                        </a>
+                        <a
+                            className="my-1 text-sm font-medium text-black transition-colors duration-200 transform hover:text-blue-500 md:mx-4 md:my-0"
+                            href=""
+                        >
+                            Profile
                         </a>
                     </div>
 
