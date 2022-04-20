@@ -14,6 +14,9 @@ import {
 	Link,
 	Routes,
 } from "react-router-dom";
+import Profile from "./Containers/Profile";
+import SellerProfile from "./Containers/SellerProfile";
+
 
 function App() {
     const [cartOpen, setCartOpen] = useState(false);
@@ -25,6 +28,7 @@ function App() {
 				<Route path="/" element={<Login />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/home" element={<Home />} />
+				<Route path="/profile" element={<SellerProfile />} />
 			</Routes>
 		</Router>
 	);

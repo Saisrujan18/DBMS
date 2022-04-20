@@ -22,14 +22,11 @@ function Navbar({ open, setOpen }) {
 							className="text-black hover:text-gray-600 focus:outline-none focus:text-gray-600 "
 							aria-label="toggle menu"
 							onClick={() => {
-                                console.log(menuOpen);
+								console.log(menuOpen);
 								setMenuOpen(!menuOpen);
 							}}
 						>
-							<svg
-								viewBox="0 0 24 24"
-								className="w-6 h-6 fill-current"
-							>
+							<svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
 								<path
 									fillRule="evenodd"
 									d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
@@ -39,12 +36,7 @@ function Navbar({ open, setOpen }) {
 					</div>
 				</div>
 				{/* Mobile Menu open: "block", Menu closed: "hidden" */}
-				<div
-					className={
-						"items-center md:flex"
-					}
-                    hidden={menuOpen}
-				>
+				<div className={"items-center md:flex"} hidden={menuOpen}>
 					<div className="flex flex-col md:flex-row md:mx-6">
 						<Link
 							className="my-1 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600 md:mx-4 md:my-0"
@@ -52,27 +44,27 @@ function Navbar({ open, setOpen }) {
 						>
 							Home
 						</Link>
-						<Link
+						{/* <Link
 							className="my-1 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600 md:mx-4 md:my-0"
 							to="/home"
 						>
 							Shop
-						</Link>
-						<Link
+						</Link> */}
+						{/* <Link
 							className="my-1 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600 md:mx-4 md:my-0"
 							to="/home"
 						>
 							Contact
-						</Link>
-						<Link
+						</Link> */}
+						{/* <Link
 							className="my-1 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600 md:mx-4 md:my-0"
 							to="/home"
 						>
 							About
-						</Link>
+						</Link> */}
 						<Link
 							className="my-1 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600 md:mx-4 md:my-0"
-							to="/home"
+							to="/profile"
 						>
 							Profile
 						</Link>
