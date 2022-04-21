@@ -21,16 +21,18 @@ import SellerProfile from "./Containers/SellerProfile";
 function App() {
     const [cartOpen, setCartOpen] = useState(false);
 	return (
-		<Router>
-			<Navbar open={cartOpen} setOpen={setCartOpen}/>
-            <Cart open={cartOpen} setOpen={setCartOpen}/>
-			<Routes>
-				<Route path="/" element={<Login />} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/home" element={<Home />} />
-				<Route path="/profile" element={<SellerProfile />} />
-			</Routes>
-		</Router>
+		<div className="flex flex-col h-screen">
+			<Router>
+				<Navbar open={cartOpen} setOpen={setCartOpen}/>
+				<Cart open={cartOpen} setOpen={setCartOpen}/>
+				<Routes>
+					<Route path="/" element={<Login />} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/home" element={<Home />} />
+					<Route path="/profile" element={<SellerProfile />} />
+				</Routes>
+			</Router>
+		</div>
 	);
 }
 

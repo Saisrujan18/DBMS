@@ -1,9 +1,9 @@
 import React from "react";
 //TODO: Set icons 
 
-function Login() {
+function Register() {
     return (
-        <div className="h-auto py-4 flex flex-col flex-grow items-center justify-center bg-gray-100">
+        <div className="h-auto flex flex-col flex-grow items-center justify-center bg-gray-100">
             <div className="flex flex-col bg-white justify-center shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-lg w-50 max-w-md">
                 <div className="font-medium self-center text-xl sm:text-3xl text-gray-800">
                     Welcome Back
@@ -156,4 +156,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default Register;

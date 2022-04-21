@@ -59,8 +59,8 @@ function Profile() {
 					<div className="flex flex-row gap-5 justify-evenly border-b-2">
 						<div
 							className={
-								"p-3 text-sm " +
-								(nav == "recent" ? "border-b-2 border-b-indigo-600" : "")
+								"p-3 text-sm cursor-pointer" +
+								(nav === "recent" ? " border-b-2 border-b-indigo-600" : "")
 							}
 							onClick={() => setNav("recent")}
 						>
@@ -68,8 +68,8 @@ function Profile() {
 						</div>
 						<div
 							className={
-								"p-3 text-sm " +
-								(nav == "past" ? "border-b-2 border-b-indigo-600" : "")
+								"p-3 text-sm cursor-pointer" +
+								(nav === "past" ? " border-b-2 border-b-indigo-600" : "")
 							}
 							onClick={() => setNav("past")}
 						>
@@ -77,8 +77,8 @@ function Profile() {
 						</div>
 						<div
 							className={
-								"p-3 text-sm " +
-								(nav == "transaction" ? "border-b-2 border-b-indigo-600" : "")
+								"p-3 text-sm cursor-pointer" +
+								(nav === "transaction" ? " border-b-2 border-b-indigo-600" : "")
 							}
 							onClick={() => setNav("transaction")}
 						>

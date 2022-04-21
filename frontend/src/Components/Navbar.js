@@ -39,40 +39,37 @@ function Navbar({ open, setOpen }) {
 				<div className={"items-center md:flex"} hidden={menuOpen}>
 					<div className="flex flex-col md:flex-row md:mx-6">
 						<Link
-							className="my-1 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600 md:mx-4 md:my-0"
+							className="my-1 md:mx-4 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600"
 							to="/home"
 						>
 							Home
 						</Link>
 						{/* <Link
-							className="my-1 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600 md:mx-4 md:my-0"
+							className="my-1 md:mx-4 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600"
 							to="/home"
 						>
 							Shop
 						</Link> */}
 						{/* <Link
-							className="my-1 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600 md:mx-4 md:my-0"
+							className="my-1 md:mx-4 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600"
 							to="/home"
 						>
 							Contact
 						</Link> */}
 						{/* <Link
-							className="my-1 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600 md:mx-4 md:my-0"
+							className="my-1 md:mx-4 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600"
 							to="/home"
 						>
 							About
 						</Link> */}
 						<Link
-							className="my-1 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600 md:mx-4 md:my-0"
+							className="my-1 md:mx-4 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600"
 							to="/profile"
 						>
 							Profile
 						</Link>
-					</div>
-
-					<div className="flex justify-center md:block">
 						<div
-							className="relative text-black transition-colors duration-200 transform hover:text-gray-600"
+							className="my-1 md:mx-4 text-black transition-colors duration-200 transform hover:text-indigo-600 cursor-pointer"
 							onClick={() => setOpen(!open)}
 						>
 							<svg
