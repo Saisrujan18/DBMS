@@ -25,13 +25,49 @@ const products = [
 		imageAlt:
 			"Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
 	},
+	{
+		id: 5,
+		name: "Medium Stuff Satchel",
+		href: "#",
+		color: "Blue",
+		price: "$32.00",
+		quantity: 1,
+		imageSrc:
+			"https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
+		imageAlt:
+			"Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
+	},
+	{
+		id: 3,
+		name: "Medium Stuff Satchel",
+		href: "#",
+		color: "Blue",
+		price: "$32.00",
+		quantity: 1,
+		imageSrc:
+			"https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
+		imageAlt:
+			"Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
+	},
+	{
+		id: 4,
+		name: "Medium Stuff Satchel",
+		href: "#",
+		color: "Blue",
+		price: "$32.00",
+		quantity: 1,
+		imageSrc:
+			"https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
+		imageAlt:
+			"Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
+	},
 	// More products...
 ];
 
 function SellerProfile() {
 	const [nav, setNav] = useState("recent");
 	return (
-		<div className="h-screen">
+		<div className="min-h-full">
 			<div className="bg-gray-100 pt-10 pb-5">
 				<div className="max-w-fit mx-auto flex flex-row max-h-40 bg-white rounded-md p-4 gap-2 shadow-md justify-center">
 					<div className="avatar my-auto flex flex-col text-center">

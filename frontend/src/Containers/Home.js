@@ -12,7 +12,7 @@ export default function Home() {
 			name: "Basic Tee",
 			href: "#",
 			imageSrc:
-				"https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
+				"https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg",
 			imageAlt: "Front of men's Basic Tee in black.",
 			price: 55,
 			currency: "$",
@@ -34,7 +34,7 @@ export default function Home() {
 			name: "Basic Tee",
 			href: "#",
 			imageSrc:
-				"https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
+				"https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-03.jpg",
 			imageAlt: "Front of men's Basic Tee in black.",
 			price: 35,
 			currency: "$",
@@ -45,7 +45,7 @@ export default function Home() {
 			name: "Basic Tee",
 			href: "#",
 			imageSrc:
-				"https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
+				"https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-04.jpg",
 			imageAlt: "Front of men's Basic Tee in black.",
 			price: 15,
 			currency: "$",
@@ -56,7 +56,7 @@ export default function Home() {
 			name: "Basic Tee",
 			href: "#",
 			imageSrc:
-				"https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
+				"https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
 			imageAlt: "Front of men's Basic Tee in black.",
 			price: 25,
 			currency: "$",
@@ -90,19 +90,19 @@ export default function Home() {
 					<div className="self-end">
 						<div className="dropdown dropdown-end">
 							<p
-								tabindex="0"
+								tabIndex="0"
 								className="text-medium m-1 btn clickables bg-none text-white bg-indigo-600 border-none hover:bg-indigo-700"
 							>
 								Filter
 							</p>
 							<ul
-								tabindex="0"
+								tabIndex="0"
 								className="p-2 shadow menu dropdown-content bg-white text-black rounded-box w-52 text-sm"
 							>
-								<li class="rounded hover:bg-gray-300 dropdown-active">
+								<li className="rounded hover:bg-gray-300 dropdown-active">
 									<p onClick={() => sortByFilter("price")}>Price</p>
 								</li>
-								<li class="rounded hover:bg-gray-300 dropdown-active">
+								<li className="rounded hover:bg-gray-300 dropdown-active">
 									<p onClick={() => sortByFilter("relevance")}>Relevance</p>
 								</li>
 							</ul>
