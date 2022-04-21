@@ -16,6 +16,7 @@ import {
 } from "react-router-dom";
 import Profile from "./Containers/Profile";
 import SellerProfile from "./Containers/SellerProfile";
+import Register from "./Containers/Register";
 
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
 				<Cart open={cartOpen} setOpen={setCartOpen}/>
 				<Routes>
 					<Route path="/" element={<Login />} />
-					<Route path="/login" element={<Login />} />
+					<Route path="/register" element={<Register />} />
 					<Route path="/home" element={<Home />} />
 					<Route path="/profile" element={<SellerProfile />} />
 				</Routes>

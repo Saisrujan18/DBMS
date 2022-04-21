@@ -32,7 +32,7 @@ function SellerProfile() {
 	const [nav, setNav] = useState("recent");
 	return (
 		<div className="h-screen">
-			<div className="bg-gray-100 p-10">
+			<div className="bg-gray-100 pt-10 pb-5">
 				<div className="max-w-fit mx-auto flex flex-row max-h-40 bg-white rounded-md p-4 gap-2 shadow-md justify-center">
 					<div className="avatar my-auto flex flex-col text-center">
 						<div className="w-20 rounded-full">
@@ -51,16 +51,25 @@ function SellerProfile() {
 							<span className="text-gray-500 p-1">Emailid</span>{" "}
 							nath.vasam@gmail.com
 						</div>
+						<button
+							type="button"
+							className="ml-auto pt-1 font-medium text-indigo-600 hover:text-indigo-500"
+						>
+							Edit
+						</button>
 					</div>
 				</div>
+				<button className="flex mt-2 mx-auto rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
+					Add Products
+				</button>
 			</div>
 			<div className="max-w-xl mx-auto px-2">
 				<div>
 					<div className="flex flex-row gap-5 justify-evenly border-b-2">
 						<div
 							className={
-								"p-3 text-sm cursor-pointer" +
-								(nav === "recent" ? " border-b-2 border-b-indigo-600" : "")
+								"p-3 text-sm hover:cursor-pointer " +
+								(nav === "recent" ? "border-b-2 border-b-indigo-600" : "")
 							}
 							onClick={() => setNav("recent")}
 						>
@@ -68,17 +77,17 @@ function SellerProfile() {
 						</div>
 						<div
 							className={
-								"p-3 text-sm cursor-pointer" +
-								(nav === "past" ? " border-b-2 border-b-indigo-600" : "")
+								"p-3 text-sm hover:cursor-pointer " +
+								(nav === "inventory" ? "border-b-2 border-b-indigo-600" : "")
 							}
-							onClick={() => setNav("past")}
+							onClick={() => setNav("inventory")}
 						>
-							Past Orders
+							Inventory
 						</div>
 						<div
 							className={
-								"p-3 text-sm cursor-pointer" +
-								(nav === "transaction" ? " border-b-2 border-b-indigo-600" : "")
+								"p-3 text-sm hover:cursor-pointer " +
+								(nav === "transaction" ? "border-b-2 border-b-indigo-600" : "")
 							}
 							onClick={() => setNav("transaction")}
 						>
@@ -86,6 +95,7 @@ function SellerProfile() {
 						</div>
 					</div>
 				</div>
+
 				<div>
 					{products.map((product) => (
 						<div key={product.id} className="flex py-6 px-3">
