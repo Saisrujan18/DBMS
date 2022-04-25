@@ -5,6 +5,7 @@ import Navbar from "./Components/Navbar";
 import Home from "./Containers/Home";
 import Login from "./Containers/Login";
 import Cart from "./Containers/Cart";
+import Product from "./Containers/Product"
 import UserProfile from "./Containers/UserProfile";
 import SellerPage from "./Containers/SellerPage";
 import {
@@ -26,7 +27,9 @@ function App() {
 				<Navbar open={cartOpen} setOpen={setCartOpen} />
 				<Cart open={cartOpen} setOpen={setCartOpen} />
 				<Routes>
-					<Route path={("/", "/login")} element={<Login />} />
+					<Route path="/" element={<Login />} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/product" element={<Product />} />
 					<Route path="/register" element={<Register />} />
 					<Route path="/home" element={<Home />} />
 					<Route path="/profile" element={<SellerProfile />} />
