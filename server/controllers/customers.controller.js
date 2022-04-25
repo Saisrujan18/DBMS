@@ -1,4 +1,4 @@
-const Product = require("../models/products.model");
+const Customer = require("../models/customers.model");
 
 const err_ = (res, message, op, e404 = false) => {
 	if (e404) {
@@ -13,14 +13,16 @@ const err_ = (res, message, op, e404 = false) => {
 };
 
 exports.create = (req, res) => {
-	const { name, price, seller_id } = req.body;
-	const product = new Product({
+	const {name, password, email_id, address, phone } = req.body;
+	const customer = new Customer({
 		name: name,
-		price: price,
-		seller_id: seller_id,
+        password: password,
+		email_id: email_id,
+		address: address,
+        phone: phone,
 	});
 
-	Product.create(product, (err, data) => {
+	Customer.create(customer, (err, data) => {
 		if (err) {
 			err_(res, err.message, "creating");
 		} else res.send(data);
@@ -28,15 +30,15 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-	Product.findAll((err, data) => {
+	Customer.findAll((err, data) => {
 		if (err) err_(res, err.message, "findAll");
 		else res.send(data);
 	});
 };
 
 exports.findById = (req, res) => {
-	const product_id = req.params.id;
-	Product.findById(product_id, (err, data) => {
+	const customer_id = req.params.id;
+	Customer.findById(customer_id, (err, data) => {
 		if (err) {
 			if (err.kind === "Not Found")
 				err_(res, `No product with id: ${product_id}`, "findById", true);
@@ -45,19 +47,20 @@ exports.findById = (req, res) => {
 	});
 };
 
-exports.updateById = (req, res) => {
-	if (!req.body) {
+exports.updateById = (req, res) =>{
+    if (!req.body) {
 		res.state(400).send({
 			message: "Empty Content for update",
 		});
 	}
-	const product_id = req.body.product_id;
-	const product = new Product(req.body);
-	Product.updateById(product_id, product, (err, data) => {
+	const customer_id = req.body.product_id;
+	const customer = new Customer(req.body);
+	Customer.updateById(customer_id, customer, (err, data) => {
 		if (err) {
 			if (err.kind === "Not Found")
-				err_(res, `No product with id: ${product_id}`, "UpdateById", true);
+				err_(res, `No product with id: ${customer_id}`, "UpdateById", true);
 			else err_(res, err.message, "updateById");
 		} else res.send(data);
 	});
-};
+}
+

@@ -10,3 +10,4 @@ router.get("/:id", products.findById);
 router.get("/", products.findAll);
 
 module.exports = router;
+
