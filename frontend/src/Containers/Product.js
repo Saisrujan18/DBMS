@@ -6,7 +6,7 @@ export default function Product()
 	const [product, setProduct] = useState(
 		{
 			id: 1,
-			name: "Basic TShirt Pack of 6",
+			name: "Basic Tee 6-Pack",
 			href: "#",
 			imageSrc:
 				["https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg", 
@@ -54,23 +54,28 @@ export default function Product()
 			</div>)
 	}
 	const GetImages = (props) => {
+		// return(
+		// 	<div className="mt-6 mx-auto sm:px-6 lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
+		// 		<div className="hidden aspect-w-3 aspect-h-4 rounded-lg overflow-hidden lg:block">
+		// 			<img src="https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg" alt="Two each of gray, white, and black shirts laying flat." className="w-full h-full object-center object-cover"/>
+		// 		</div>
+		// 		<div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
+		// 			<div className="aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
+		// 			<img src="https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg" alt="Model wearing plain black basic tee." className="w-full h-full object-center object-cover"/>
+		// 			</div>
+		// 			<div className="aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
+		// 			<img src="https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg" alt="Model wearing plain gray basic tee." className="w-full h-full object-center object-cover"/>
+		// 			</div>
+		// 		</div>
+		// 		<div className="aspect-w-4 aspect-h-5 sm:rounded-lg sm:overflow-hidden lg:aspect-w-3 lg:aspect-h-4">
+		// 			<img src="https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg" alt="Model wearing plain white basic tee." className="w-full h-full object-center object-cover"/>
+		// 		</div>
+		// 	</div>
+		// )
 		return(
-			<div className="mt-6 mx-auto sm:px-6 lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
-				<div className="hidden aspect-w-3 aspect-h-4 rounded-lg overflow-hidden lg:block">
-					<img src="https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg" alt="Two each of gray, white, and black shirts laying flat." className="w-full h-full object-center object-cover"/>
-				</div>
-				<div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-					<div className="aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
-					<img src="https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg" alt="Model wearing plain black basic tee." className="w-full h-full object-center object-cover"/>
-					</div>
-					<div className="aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
-					<img src="https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg" alt="Model wearing plain gray basic tee." className="w-full h-full object-center object-cover"/>
-					</div>
-				</div>
-				<div className="aspect-w-4 aspect-h-5 sm:rounded-lg sm:overflow-hidden lg:aspect-w-3 lg:aspect-h-4">
-					<img src="https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg" alt="Model wearing plain white basic tee." className="w-full h-full object-center object-cover"/>
-				</div>
-			</div>
+			<div className="mt-6 lg:w-1/2 w-1/3 h-auto self-center">
+				<img src={product.imageSrc[0]} alt={product.imageSrc[0]} className="w-full h-full object-center object-cover"/>
+			</div>	
 		)
 	}
 	const Star = (props) => {
@@ -191,14 +196,11 @@ export default function Product()
 			</div>
 		)
 	}
-	return(
-		<div className="bg-white pt-6">
-			<GetProductPath path={product.path}/>
-			<GetImages/>
-
+	const ProductInfo = () => {
+		return(
 			<div className="mx-auto pt-10 pb-16 px-4 sm:px-6 lg:pt-16 lg:pb-24 lg:px-8 lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
 				<div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-					<h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">Basic Tee 6-Pack</h1>
+					<h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">{product.name}</h1>
 				</div>
 
 				<div className="mt-4 lg:mt-0 lg:row-span-3">
@@ -215,6 +217,13 @@ export default function Product()
 				</div>
 				<GetDescription/>
 			</div>
+		)
+	}
+	return(
+		<div className="bg-white pt-6 self-center max-w-2xl lg:max-w-7xl flex flex-col">
+			<GetProductPath path={product.path}/>
+			<GetImages/>
+			<ProductInfo/>
 		</div>
 	)
 }
