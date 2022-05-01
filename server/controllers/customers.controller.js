@@ -13,13 +13,13 @@ const err_ = (res, message, op, e404 = false) => {
 };
 
 exports.create = (req, res) => {
-	const {name, password, email_id, address, phone } = req.body;
+	const { name, password, email_id, address, phone } = req.body;
 	const customer = new Customer({
 		name: name,
-        password: password,
+		password: password,
 		email_id: email_id,
 		address: address,
-        phone: phone,
+		phone: phone,
 	});
 
 	Customer.create(customer, (err, data) => {
@@ -41,26 +41,25 @@ exports.findById = (req, res) => {
 	Customer.findById(customer_id, (err, data) => {
 		if (err) {
 			if (err.kind === "Not Found")
-				err_(res, `No product with id: ${product_id}`, "findById", true);
+				err_(res, `No customer with id: ${customer_id}`, "findById", true);
 			else err_(res, err.message);
 		} else res.send(data);
 	});
 };
 
-exports.updateById = (req, res) =>{
-    if (!req.body) {
+exports.updateById = (req, res) => {
+	if (!req.body) {
 		res.state(400).send({
 			message: "Empty Content for update",
 		});
 	}
-	const customer_id = req.body.product_id;
+	const customer_id = req.body.customer_id;
 	const customer = new Customer(req.body);
 	Customer.updateById(customer_id, customer, (err, data) => {
 		if (err) {
 			if (err.kind === "Not Found")
-				err_(res, `No product with id: ${customer_id}`, "UpdateById", true);
+				err_(res, `No customer with id: ${customer_id}`, "UpdateById", true);
 			else err_(res, err.message, "updateById");
 		} else res.send(data);
 	});
-}
-
+};
