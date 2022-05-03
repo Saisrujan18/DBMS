@@ -1,8 +1,32 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,Navigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+// 	const [collabData, setCollabData] = useState({});
+// 	const [showInfo, setShowInfo] = useState(true);
+// 	const [showMembers, setShowMembers] = useState(false);
+// 	const [showComments, setShowComments] = useState(false);
+// 	const [editorNegative, setNegative] =useState(false);
+// 	const [comments, setComments] = useState([]);
+
+// 	// Fetching all the data required to show in this page
+// 	useEffect(() => {
+// 		axios
+// 		.get("/api/collab/id", { params: {id} })
+// 		.then((res) => {
+// 			// receive the data.
+// 			setCollabData(res.data);
+// 			setComments(res.data.comments);
+// 			setLoading(false);
+// 		})
+// 		.catch((err) => console.log(err));
+// 	}, []);
 export default function Product()
 {
+	// const { user } = useAuth();
+	const { id } = useParams();
+	const [loading, setLoading] = useState(true);
 	const [product, setProduct] = useState(
 		{
 			id: 1,
@@ -196,7 +220,16 @@ export default function Product()
 			</div>
 		)
 	}
+
+	
+
 	const ProductInfo = () => {
+		function AddToCart(event)
+		{
+			// event.preventdefault();
+			console.log("FUCKED");
+			// <Navigate to="/cart"/>
+		}
 		return(
 			<div className="mx-auto pt-10 pb-16 px-4 sm:px-6 lg:pt-16 lg:pb-24 lg:px-8 lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
 				<div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
@@ -209,10 +242,10 @@ export default function Product()
 
 					<GetRating rating={product.rating}/>
 
-					<form>
+					<form onSubmit={AddToCart}>
 						{product.color.length > 0 && <ColorSet/>}
 						{product.size.length > 0 && <SizeSet/>}
-						<button type="submit" className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add to Bag</button>
+						<Link type="submit" to="/cart" className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add to Bag</Link>
 					</form>
 				</div>
 				<GetDescription/>
