@@ -1,16 +1,17 @@
+import auth from "../middleware/auth";
 let express = require("express");
 let router = express.Router();
 
 let orders = require("../controllers/orders.controller");
 
-router.put("/add", orders.create);
+router.put("/add", auth, orders.create);
 
 // customer_id
-router.get("/:id", orders.findById);
+router.get("/:id", auth, orders.findById);
 
-router.get("/", orders.findAll);
+router.get("/", auth, orders.findAll);
 
-router.get("/update", orders.updateById)
+router.get("/update", auth, orders.updateById)
 
 module.exports = router;
 

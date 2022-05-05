@@ -5,10 +5,11 @@ const db = require("../config/db");
 const Customer = function (customer) {
 	// this.customer_id = customer.customer_id;
 	this.name = customer.name;
-    this.password = customer.password;
-    this.email_id = customer.email_id;
-    this.address = customer.address;
+	this.password = customer.password;
+	this.email_id = customer.email_id;
+	this.address = customer.address;
 	this.phone = customer.phone;
+	this.token = customer.token;
 };
 
 Customer.create = (newCustomer, result) => {
@@ -44,11 +45,31 @@ Customer.findById = (customer_id, result) => {
 		}
 	});
 };
+
+Customer.findByEmail = (email_id, result) => {
+	let query = `SELECT * from customers WHERE email_id = ${email_id}`;
+	db.query(query, (err, res) => {
+		if (err) {
+			result(err, null);
+		} else {
+			result(null, res);
+		}
+	});
+};
+
+
 Customer.updateById = (customer_id, customer, result) => {
-	let query = "UPDATE customers SET name = ?, email_id = ?, address = ?, phone=? WHERE id=?";
+	let query =
+		"UPDATE customers SET name = ?, email_id = ?, address = ?, phone=? WHERE id=?";
 	db.query(
 		query,
-		[customer.name, customer.email_id, customer.address, customer.phone, customer_id],
+		[
+			customer.name,
+			customer.email_id,
+			customer.address,
+			customer.phone,
+			customer_id,
+		],
 		(err, res) => {
 			if (err) {
 				result(err, null);
@@ -59,7 +80,6 @@ Customer.updateById = (customer_id, customer, result) => {
 		}
 	);
 };
-
 
 
 module.exports = Customer;

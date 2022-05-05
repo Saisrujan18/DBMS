@@ -1,6 +1,6 @@
 const Customer = require("../models/customers.model");
 
-const err_ = (res, message, op, e404 = false) => {
+export const err_ = (res, message, op, e404 = false) => {
 	if (e404) {
 		res.status(404).send({
 			message: message,
@@ -21,13 +21,41 @@ exports.create = (req, res) => {
 		address: address,
 		phone: phone,
 	});
+	
 
 	Customer.create(customer, (err, data) => {
 		if (err) {
 			err_(res, err.message, "creating");
-		} else res.send(data);
+		} else {
+			const token = jwt.sign(
+				{user_id: data.id, email_id},
+				process.env.TOKEN_KEY,
+				{
+					expiresIn: "2h",
+				}
+			)
+			data.token = token;
+			res.send(data);
+		}
 	});
 };
+exports.findByEmail = (req, res) =>{
+	const {email_id} = req.body;
+	Customer.findByEmail(email_id, (err, data) => {
+		if (err) err_(res, err.message, "findByEmail");
+		else {
+			const token = jwt.sign(
+				{user_id: data.id, email_id},
+				process.env.TOKEN_KEY,
+				{
+					expiresIn: "2h",
+				}
+			)
+			data.token = token;
+			res.send(data);
+		}
+	})
+}
 
 exports.findAll = (req, res) => {
 	Customer.findAll((err, data) => {
