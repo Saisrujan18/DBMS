@@ -1,4 +1,5 @@
-import auth from "../middleware/auth";
+//import auth from "../middleware/auth";
+const auth = require("../middleware/auth");
 let express = require("express");
 let router = express.Router();
 
@@ -11,7 +12,6 @@ router.get("/:id", auth, orders.findById);
 
 router.get("/", auth, orders.findAll);
 
-router.get("/update", auth, orders.updateById)
+router.get("/update", auth, orders.updateById);
 
 module.exports = router;
-

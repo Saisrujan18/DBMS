@@ -1,4 +1,5 @@
-import auth from "../middleware/auth";
+//import auth from "../middleware/auth";
+const auth = require("../middleware/auth");
 let express = require("express");
 let router = express.Router();
 

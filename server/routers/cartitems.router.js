@@ -1,6 +1,7 @@
 let express = require("express");
 let router = express.Router();
-import auth from "../middleware/auth";
+// import auth from "../middleware/auth";
+const auth = require("../middleware/auth");
 let cartitems = require("../controllers/cartitems.controller");
 
 router.put("/add", auth ,cartitems.create);

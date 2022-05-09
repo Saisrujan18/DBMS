@@ -1,4 +1,6 @@
-import auth from "../middleware/auth";
+// import auth from "../middleware/auth";
+
+const auth = require("../middleware/auth");
 let express = require("express");
 let router = express.Router();
 
@@ -11,4 +13,3 @@ router.get("/:id", auth, products.findById);
 router.get("/", auth, products.findAll);
 
 module.exports = router;
-

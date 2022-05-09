@@ -28,4 +28,18 @@ db.connect((err) => {
 	// });
 });
 
+/* Create customers table */
+// CREATE TABLE `ecommerce`.`customers` (
+//   `name` VARCHAR(45) NOT NULL,
+//   `password` VARCHAR(45) NOT NULL,
+//   `email_id` VARCHAR(45) NOT NULL,
+//   `address` VARCHAR(45) NULL,
+//   `token` VARCHAR(45) NULL,
+//   `phone` VARCHAR(45) NULL,
+//   `customer_id` INT NOT NULL AUTO_INCREMENT,
+//   PRIMARY KEY (`email_id`),
+//   UNIQUE INDEX `customer_id_UNIQUE` (`customer_id` ASC) VISIBLE,
+//   UNIQUE INDEX `email_id_UNIQUE` (`email_id` ASC) VISIBLE);
+
+
 module.exports = db;

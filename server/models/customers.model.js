@@ -1,6 +1,6 @@
 const db = require("../config/db");
 
-//table-name: products
+//table-name: customers
 
 const Customer = function (customer) {
 	// this.customer_id = customer.customer_id;
