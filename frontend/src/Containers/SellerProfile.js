@@ -72,19 +72,32 @@ function SellerProfile() {
 		address:"Mumbai",
 		email:"nath.vasam@gmail.com"
 	});
-	function update(event)
-	{
+	const [product,setProduct]=useState({
+		name:"Manjunath",
+		price:"13",
+		description:"Mumbai",
+		category:"Men",
+		imagesrc:"#",
+		searchitem:"Shirt"
+	});
+	const update = (event) => {
 		event.preventDefault();
-		console.log(event.target.value);
-		let x=currentUser;
-		x[event.target.id]=10;
-		console.log(x);
-		setUser(x);
-		
-	}
+		const { id, value } = event.target;
+		setUser((prevNote) => {
+			return {
+			...prevNote,
+			[id]: value,
+			};
+		});
+	};
 	function UpdateInDb(event)
 	{
 		console.log("insert into db");
+		console.log(currentUser);
+	}
+	function AddProduct(event)
+	{
+		console.log("Add product to Db");
 	}
 	return (
 		<div className="min-h-full">
@@ -155,17 +168,16 @@ function SellerProfile() {
 						<div
 							className={
 								"p-3 text-sm hover:cursor-pointer " +
-								(nav === "transaction" ? "border-b-2 border-b-indigo-600" : "")
+								(nav === "addproducts" ? "border-b-2 border-b-indigo-600" : "")
 							}
-							onClick={() => setNav("transaction")}
+							onClick={() => setNav("addproducts")}
 						>
 							Add Products
 						</div>
 					</div>
 				</div>
-
 				<div>
-					{products.map((product) => (
+					{nav!=="addproducts" && products.map((product) => (
 						<div key={product.id} className="flex py-6 px-3">
 							<div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
 								<img
@@ -191,6 +203,42 @@ function SellerProfile() {
 							</div>
 						</div>
 					))}
+					{nav==="addproducts" && 
+						<div className="flex flex-col space-y-2 pt-4">
+							<div className="flex flex-row  w-100">
+							<span className="text-gray-500 w-40 p-1">Name</span>
+							<input type="text" onChange={update} id="name" value={product.name}/>
+						</div>
+						<div className="flex flex-row w-100">
+							<span className="text-gray-500 w-40 p-1">Description</span>
+							<input type="text" onChange={update} id="description" value={product.description}/>
+						</div>
+						<div className="flex flex-row w-100">
+							<span className="text-gray-500 w-40 p-1">price</span>
+							<input type="text" onChange={update} id="price" value={product.price}/>
+						</div>
+						<div className="flex flex-row w-100">
+							<span className="text-gray-500 w-40 p-1">Category</span>
+							<input type="text" onChange={update} id="category" value={product.category}/>
+						</div>
+						<div className="flex flex-row w-100">
+							<span className="text-gray-500 w-40 p-1">ImageSrc</span>
+							<input type="text" onChange={update} id="imagesrc" value={product.imagesrc}/>
+						</div>
+						<div className="flex flex-row w-100">
+							<span className="text-gray-500 w-40 p-1">SearchItem</span>
+							<input type="text" onChange={update} id="searchitem" value={product.searchitem}/>
+						</div>
+							<button
+								type="button"
+								className="ml-auto pt-1 font-medium text-indigo-600 hover:text-indigo-500"
+								onClick={AddProduct}
+							>
+								Add
+							</button>
+						</div> 
+					}
+
 				</div>
 			</div>
 		</div>
