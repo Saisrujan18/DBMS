@@ -1,8 +1,28 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 //TODO: Set icons
 
-function Login() {
+function Login({setUserData}) {
+	const [email_id, setEmail_id] = useState("");
+	const [password, setPassword] = useState("");
+	const navigate = useNavigate();
+
+	const handleSubmit = () => {
+		let url = "http://localhost:3002/api/auth/login";
+		axios
+			.post(url, {
+				email_id: email_id,
+				password: password,
+			})
+			.then((res) => {
+				sessionStorage.setItem("user", JSON.stringify(res.data));
+				setUserData(res.data);
+				navigate("/home");
+			})
+			.catch((err) => console.log(err));
+	};
+
 	return (
 		<div className="h-auto py-4 flex flex-col flex-grow items-center justify-center bg-gray-100">
 			<div className="flex flex-col bg-white justify-center shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-lg w-50 max-w-md">
@@ -14,14 +34,13 @@ function Login() {
 				</div>
 
 				<div className="mt-10">
-					<form action="#">
-						<div className="flex flex-col mb-5">
-							<label className="mb-1 text-xs tracking-wide text-gray-600">
-								E-Mail Address:
-							</label>
-							<div className="relative">
-								<div
-									className="
+					<div className="flex flex-col mb-5">
+						<label className="mb-1 text-xs tracking-wide text-gray-600">
+							E-Mail Address:
+						</label>
+						<div className="relative">
+							<div
+								className="
                                     inline-flex
                                     items-center
                                     justify-center
@@ -31,28 +50,30 @@ function Login() {
                                     h-full
                                     w-10
                                     text-gray-400"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="h-6 w-6"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+									strokeWidth="2"
 								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										class="h-6 w-6"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke="currentColor"
-										stroke-width="2"
-									>
-										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-										/>
-									</svg>
-								</div>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+									/>
+								</svg>
+							</div>
 
-								<input
-									id="email"
-									type="email"
-									name="email"
-									className="
+							<input
+								id="email"
+								type="email"
+								name="email"
+								value={email_id}
+								onChange={(e) => setEmail_id(e.target.value)}
+								className="
                                         text-sm
                                         placeholder-gray-500
                                         pl-10
@@ -62,17 +83,17 @@ function Login() {
                                         w-full
                                         py-2
                                         focus:outline-none focus:border-blue-400"
-									placeholder="Enter your email"
-								/>
-							</div>
+								placeholder="Enter your email"
+							/>
 						</div>
-						<div className="flex flex-col mb-6">
-							<label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">
-								Password:
-							</label>
-							<div className="relative">
-								<div
-									className="
+					</div>
+					<div className="flex flex-col mb-6">
+						<label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">
+							Password:
+						</label>
+						<div className="relative">
+							<div
+								className="
                                         inline-flex
                                         items-center
                                         justify-center
@@ -82,28 +103,30 @@ function Login() {
                                         h-full
                                         w-10
                                         text-gray-400"
-								>
-									<span>
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											class="h-5 w-5"
-											viewBox="0 0 20 20"
-											fill="currentColor"
-										>
-											<path
-												fill-rule="evenodd"
-												d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-												clip-rule="evenodd"
-											/>
-										</svg>
-									</span>
-								</div>
+							>
+								<span>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-5 w-5"
+										viewBox="0 0 20 20"
+										fill="currentColor"
+									>
+										<path
+											fillRule="evenodd"
+											d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+											clipRule="evenodd"
+										/>
+									</svg>
+								</span>
+							</div>
 
-								<input
-									id="password"
-									type="password"
-									name="password"
-									className="
+							<input
+								id="password"
+								type="password"
+								name="password"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+								className="
                                         text-sm
                                         placeholder-gray-500
                                         pl-10
@@ -113,15 +136,15 @@ function Login() {
                                         w-full
                                         py-2
                                         focus:outline-none focus:border-blue-400"
-									placeholder="Enter your password"
-								/>
-							</div>
+								placeholder="Enter your password"
+							/>
 						</div>
+					</div>
 
-						<div className="flex w-full">
-							<button
-								type="submit"
-								className="
+					<div className="flex w-full">
+						<button
+							onClick={handleSubmit}
+							className="
                                         flex
                                         mt-2
                                         items-center
@@ -134,24 +157,23 @@ function Login() {
                                         transition
                                         duration-150
                                         ease-in"
-							>
-								<span className="mr-2 uppercase">Sign In</span>
-								<span>
-									<svg
-										className="h-6 w-6"
-										fill="none"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth="2"
-										viewBox="0 0 24 24"
-										stroke="currentColor"
-									>
-										<path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-									</svg>
-								</span>
-							</button>
-						</div>
-					</form>
+						>
+							<span className="mr-2 uppercase">Sign In</span>
+							<span>
+								<svg
+									className="h-6 w-6"
+									fill="none"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth="2"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+								</svg>
+							</span>
+						</button>
+					</div>
 				</div>
 			</div>
 			<div className="flex justify-center items-center mt-6">

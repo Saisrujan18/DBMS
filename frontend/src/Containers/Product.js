@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
@@ -21,9 +22,9 @@ import { useParams } from "react-router-dom";
 // 		})
 // 		.catch((err) => console.log(err));
 // 	}, []);
-export default function Product() {
-	// const { user } = useAuth();
+export default function Product({ user, addToCart }) {
 	const { id } = useParams();
+	let pro = {product_id: 2, customer_id: user.customer_id, name: "hello", price: "50", seller_id : "1"}
 	const [loading, setLoading] = useState(true);
 	const [product, setProduct] = useState({
 		id: 1,
@@ -292,11 +293,7 @@ export default function Product() {
 	};
 
 	const ProductInfo = () => {
-		function AddToCart(event) {
-			// event.preventdefault();
-			console.log("");
-			// <Navigate to="/cart"/>
-		}
+		
 		return (
 			<div className="mx-auto pt-10 pb-16 px-4 sm:px-6 lg:pt-16 lg:pb-24 lg:px-8 lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
 				<div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
@@ -311,17 +308,17 @@ export default function Product() {
 
 					<GetRating rating={product.rating} />
 
-					<form onSubmit={AddToCart}>
+					<div>
 						{product.color.length > 0 && <ColorSet />}
 						{product.size.length > 0 && <SizeSet />}
-						<Link
-							type="submit"
+						<button
 							to="/cart"
+							onClick={() => addToCart(pro)}
 							className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 						>
 							Add to Bag
-						</Link>
-					</form>
+						</button>
+					</div>
 				</div>
 				<GetDescription />
 			</div>

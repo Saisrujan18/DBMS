@@ -1,4 +1,4 @@
-const CartItem = require("../models/orders.model");
+const CartItem = require("../models/cartitems.model");
 
 const err_ = (res, message, op, e404 = false) => {
 	if (e404) {
@@ -14,13 +14,13 @@ const err_ = (res, message, op, e404 = false) => {
 
 exports.create = (req, res) => {
 	const { customer_id, product_id, quantity } = req.body;
-	const order = new CartItem({
+	const cartitem = new CartItem({
 		customer_id,
 		product_id,
 		quantity,
 	});
 
-	CartItem.create(order, (err, data) => {
+	CartItem.create(cartitem, (err, data) => {
 		if (err) {
 			err_(res, err.message, "creating");
 		} else res.send(data);
@@ -35,8 +35,9 @@ exports.findAll = (req, res) => {
 };
 
 exports.findById = (req, res) => {
-	const customer_id = req.params.id;
-	Order.findByCustomerId(customer_id, (err, data) => {
+	const customer_id = req.user.customer_id;
+	console.log(customer_id);
+	CartItem.findByCustomerId(customer_id, (err, data) => {
 		if (err) {
 			if (err.kind === "Not Found")
 				err_(res, `No cartitem with id: ${cartitem_id}`, "findById", true);
@@ -64,7 +65,7 @@ exports.updateById = (req, res) => {
 
 exports.deleteById = (req, res) => {
 	const cartitem_id = req.body.cartitem_id;
-	CartItem.updateById(cartitem_id, (err, data) => {
+	CartItem.deleteById(cartitem_id, (err, data) => {
 		if (err) {
 			if (err.kind === "Not Found")
 				err_(res, `No product with id: ${cartitem_id}`, "DeleteById", true);

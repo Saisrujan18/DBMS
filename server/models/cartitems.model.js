@@ -16,8 +16,7 @@ CartItem.create = (newCartItem, result) => {
 		if (err) {
 			result(err, null);
 		} else {
-			console.log("here", { id: res.insertId, ...newCartItem });
-			result(null, { id: res.insertId, ...newCartItem });
+			result(null, { cartitem_id: res.insertId, ...newCartItem });
 		}
 	});
 };
@@ -33,7 +32,7 @@ CartItem.findAll = (result) => {
 };
 
 CartItem.findByCustomerId = (customer_id, result) => {
-	let query = `SELECT * from cartitems WHERE customer_id = ${customer_id};`;
+	let query = `SELECT * from cartitems NATURAL JOIN products WHERE customer_id = ${customer_id}`;
 	db.query(query, (err, res) => {
 		if (err) {
 			result(err, null);
@@ -59,20 +58,20 @@ CartItem.updateById = (cartitem_id, cart_item, result) => {
 	);
 };
 
-CartItem.deleteById = (cartitem_id, cart_item, result) =>{
-	let query = "DELETE from cartitems WHERE id=? and product_id=?";
+CartItem.deleteById = (cartitem_id, result) =>{
+	let query = "DELETE from cartitems WHERE cartitem_id=?";
 	db.query(
 		query,
-		[cartitem_id, cart_item.product_id],
+		cartitem_id,
 		(err, res) => {
 			if (err) {
 				result(err, null);
 			} else {
 				if (res.affectedRows == 0) result({ kind: "not_found" }, null);
-				else result(null, { id: id, ...cart_item });
+				else result(null, { cartitem_id: cartitem_id });
 			}
 		}
 	)
 }
 
-module.exports = Cart;
+module.exports = CartItem;

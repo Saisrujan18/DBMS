@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Register() {
@@ -7,6 +7,8 @@ function Register() {
 	const [password, setPassword] = useState("");
 	const [email_id, setEmail_id] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
+
+	const navigate = useNavigate();
 
 	const handleInputChange = (e) => {
 		const { id, value } = e.target;
@@ -44,8 +46,9 @@ function Register() {
 				address: "",
 				phone: "",
 			})
-			.then((data) => {
-				sessionStorage.setItem("user", data);
+			.then((res) => {
+				sessionStorage.setItem("user", JSON.stringify(res.data));
+				navigate("/home");
 			})
 			.catch((err) => console.log(err));
 	};

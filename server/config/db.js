@@ -40,6 +40,11 @@ db.connect((err) => {
 //   PRIMARY KEY (`email_id`),
 //   UNIQUE INDEX `customer_id_UNIQUE` (`customer_id` ASC) VISIBLE,
 //   UNIQUE INDEX `email_id_UNIQUE` (`email_id` ASC) VISIBLE);
-
+//
+// CREATE TABLE `ecommerce`.`cartitems` (
+//   `product_id` INT NOT NULL,
+//   `customer_id` INT NOT NULL,
+//   `quantity` INT NOT NULL,
+//   PRIMARY KEY (`product_id`, `customer_id`));
 
 module.exports = db;

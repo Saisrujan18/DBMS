@@ -4,17 +4,17 @@ let router = express.Router();
 const auth = require("../middleware/auth");
 let cartitems = require("../controllers/cartitems.controller");
 
-router.put("/add", auth ,cartitems.create);
+
+// router.get("/:id", auth, cartitems.findById);
+
+router.get("/", auth, cartitems.findById);
 
 // customer_id
-router.get("/:id", auth, cartitems.findById);
-
-router.get("/", auth, cartitems.findAll);
-
+router.post("/add", auth ,cartitems.create);
 // cartitem_id
 router.get("/update", auth, cartitems.updateById);
 
-router.get("/remove", auth, cartitems.deleteById);
+router.post("/remove", auth, cartitems.deleteById);
 
 module.exports = router;
 

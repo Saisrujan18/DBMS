@@ -39,6 +39,7 @@ Customer.findById = (customer_id, result) => {
 	let query = `SELECT * from customers WHERE id = ${customer_id};`;
 	db.query(query, (err, res) => {
 		if (err) {
+			console.log(err);
 			result(err, null);
 		} else {
 			result(null, res);
@@ -46,17 +47,18 @@ Customer.findById = (customer_id, result) => {
 	});
 };
 
-Customer.findByEmail = (email_id, result) => {
-	let query = `SELECT * from customers WHERE email_id = ${email_id}`;
+Customer.findByEmailAndPassword = (email_id, password, result) => {
+	// console.log(email_id, password)
+	let query = `SELECT * from customers WHERE email_id="${email_id}" and password="${password}";`;
 	db.query(query, (err, res) => {
 		if (err) {
+			console.log(err);
 			result(err, null);
 		} else {
 			result(null, res);
 		}
 	});
 };
-
 
 Customer.updateById = (customer_id, customer, result) => {
 	let query =
@@ -80,6 +82,5 @@ Customer.updateById = (customer_id, customer, result) => {
 		}
 	);
 };
-
 
 module.exports = Customer;

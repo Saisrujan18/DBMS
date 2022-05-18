@@ -28,6 +28,7 @@ exports.create = (req, res) => {
 		if (err) {
 			err_(res, err.message, "creating");
 		} else {
+			data = data[0];
 			const token = jwt.sign(
 				{ user_id: data.id, email_id },
 				process.env.TOKEN_KEY,
@@ -40,20 +41,21 @@ exports.create = (req, res) => {
 		}
 	});
 };
-exports.findByEmail = (req, res) => {
-	const { email_id } = req.body;
-	Customer.findByEmail(email_id, (err, data) => {
+exports.findByEmailAndPassword = (req, res) => {
+	const { email_id, password } = req.body;
+	Customer.findByEmailAndPassword(email_id, password, (err, data) => {
 		if (err) err_(res, err.message, "findByEmail");
 		else {
+			data = data[0];
 			const token = jwt.sign(
-				{ user_id: data.id, email_id },
+				{ customer_id: data.customer_id, email_id: data.email_id, name: data.name },
 				process.env.TOKEN_KEY,
 				{
 					expiresIn: "2h",
 				}
 			);
 			data.token = token;
-			res.send(data);
+			res.json(data);
 		}
 	});
 };
