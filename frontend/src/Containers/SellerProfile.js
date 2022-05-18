@@ -66,6 +66,26 @@ const products = [
 
 function SellerProfile() {
 	const [nav, setNav] = useState("recent");
+	const [currentUser,setUser]=useState({
+		name:"Manjunath",
+		phone:"8830526885",
+		address:"Mumbai",
+		email:"nath.vasam@gmail.com"
+	});
+	function update(event)
+	{
+		event.preventDefault();
+		console.log(event.target.value);
+		let x=currentUser;
+		x[event.target.id]=10;
+		console.log(x);
+		setUser(x);
+		
+	}
+	function UpdateInDb(event)
+	{
+		console.log("insert into db");
+	}
 	return (
 		<div className="min-h-full">
 			<div className="bg-gray-100 pt-10 pb-5">
@@ -74,30 +94,33 @@ function SellerProfile() {
 						<div className="w-20 rounded-full">
 							<img src="https://api.lorem.space/image/face?hash=92048" />
 						</div>
-						<h1 className="text-sm">Manjunath</h1>
+						<h1 className="text-sm">{currentUser.name}</h1>
 					</div>
 					<div className="flex flex-col my-1 overflow-clip">
-						<div className="w-60">
-							<span className="text-gray-500 w-10 p-1">Phone</span> 8830526885
+						<div className="flex flex-row  w-80">
+							<span className="text-gray-500 w-20 p-1">Phone</span>
+							<input type="text" onChange={update} id="phone" value={currentUser.phone}/>
 						</div>
-						<div className="w-60">
-							<span className="text-gray-500 p-1">Address</span> 2105, WA, USA
+						<div className="flex flex-row w-80">
+							<span className="text-gray-500 w-20 p-1">Address</span>
+							<input type="text" onChange={update} id="address" value={currentUser.address}/>
 						</div>
-						<div className="w-60">
-							<span className="text-gray-500 p-1">Emailid</span>{" "}
-							nath.vasam@gmail.com
+						<div className="flex flex-row w-80">
+							<span className="text-gray-500 w-20 p-1">EmailId</span>
+							<input type="text" onChange={update} id="email" value={currentUser.email}/>
 						</div>
 						<button
 							type="button"
 							className="ml-auto pt-1 font-medium text-indigo-600 hover:text-indigo-500"
+							onClick={UpdateInDb}
 						>
-							Edit
+							Save
 						</button>
 					</div>
 				</div>
-				<button className="flex mt-2 mx-auto rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
+				{/* <button className="flex mt-2 mx-auto rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
 					Add Products
-				</button>
+				</button> */}
 			</div>
 			<div className="max-w-xl mx-auto px-2">
 				<div>
@@ -128,6 +151,15 @@ function SellerProfile() {
 							onClick={() => setNav("transaction")}
 						>
 							Transactions
+						</div>
+						<div
+							className={
+								"p-3 text-sm hover:cursor-pointer " +
+								(nav === "transaction" ? "border-b-2 border-b-indigo-600" : "")
+							}
+							onClick={() => setNav("transaction")}
+						>
+							Add Products
 						</div>
 					</div>
 				</div>

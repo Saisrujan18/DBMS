@@ -123,7 +123,7 @@ function App() {
 					<Route path="/product/" element={Protect(<Product />)} />
 					<Route path="/register" element={<Register />} />
 					<Route path="/home" element={Protect(<Home />)} />
-					<Route path="/profile" element={Protect(<SellerProfile />)} />
+					<Route path="/profile" element={<SellerProfile />} />
 					<Route path="/cart" element={Protect(<Cart />)} />
 				</Routes>
 			</Router>
