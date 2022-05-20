@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function Navbar({ open, setOpen, userData, setUserData }) {
+function Navbar({ open, setOpen, userData, setUserData, cartsize }) {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const navigate = useNavigate();
 	// console.log(userData);
 	const handleLogout = () => {
 		sessionStorage.removeItem("user");
-		setUserData(null)
+		setUserData(null);
 		navigate("/login");
 	};
 
@@ -47,57 +47,45 @@ function Navbar({ open, setOpen, userData, setUserData }) {
 				{userData && (
 					<div className={"items-center md:flex"} hidden={menuOpen}>
 						<div className="flex flex-col md:flex-row md:mx-6">
-							<Link
-								className="my-1 md:mx-4 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600"
-								to="/home"
-							>
-								Home
-							</Link>
-							{/* <Link
-							className="my-1 md:mx-4 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600"
-							to="/home"
-						>
-							Shop
-						</Link> */}
-							{/* <Link
-							className="my-1 md:mx-4 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600"
-							to="/home"
-						>
-							Contact
-						</Link> */}
-							{/* <Link
-							className="my-1 md:mx-4 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600"
-							to="/home"
-						>
-							About
-						</Link> */}
-							<Link
-								className="my-1 md:mx-4 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600"
-								to="/profile"
-							>
-								Profile
-							</Link>
-							<div
-								className="my-1 md:mx-4 text-black transition-colors duration-200 transform hover:text-indigo-600 cursor-pointer"
-								onClick={() => setOpen(!open)}
-							>
-								<svg
-									className="w-5 h-5"
-									viewBox="0 0 24 24"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.70711 15.2929C4.07714 15.9229 4.52331 17 5.41421 17H17M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM9 19C9 20.1046 8.10457 21 7 21C5.89543 21 5 20.1046 5 19C5 17.8954 5.89543 17 7 17C8.10457 17 9 17.8954 9 19Z"
-										stroke="currentColor"
-										strokeWidth="2"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									/>
-								</svg>
+							{userData.customer_id && (
+								<>
+									<Link
+										className="my-1 md:mx-4 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600"
+										to="/home"
+									>
+										Home
+									</Link>
+									<Link
+										className="my-1 md:mx-4 text-sm font-medium text-black transition-colors duration-200 transform hover:text-indigo-600"
+										to="/profile"
+									>
+										Profile
+									</Link>
+									<div
+										className="my-1 md:mx-4 text-black transition-colors duration-200 transform hover:text-indigo-600 cursor-pointer"
+										onClick={() => setOpen(!open)}
+									>
+										<svg
+											className="w-5 h-5"
+											viewBox="0 0 24 24"
+											fill="none"
+											xmlns="http://www.w3.org/2000/svg"
+										>
+											<path
+												d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.70711 15.2929C4.07714 15.9229 4.52331 17 5.41421 17H17M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM9 19C9 20.1046 8.10457 21 7 21C5.89543 21 5 20.1046 5 19C5 17.8954 5.89543 17 7 17C8.10457 17 9 17.8954 9 19Z"
+												stroke="currentColor"
+												strokeWidth="2"
+												strokeLinecap="round"
+												strokeLinejoin="round"
+											/>
+										</svg>
 
-								<span className="absolute top-0 left-0 p-1 text-xs text-white bg-indigo-600 rounded-full"></span>
-							</div>
+										{cartsize > 0 && (
+											<span className="absolute top-0 left-0 p-1 text-xs text-white bg-indigo-600 rounded-full"></span>
+										)}
+									</div>{" "}
+								</>
+							)}
 							<div
 								className="my-1 md:mx-4 text-black transition-colors duration-200 transform hover:text-indigo-600 cursor-pointer"
 								onClick={handleLogout}

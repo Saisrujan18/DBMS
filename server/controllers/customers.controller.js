@@ -33,10 +33,11 @@ exports.create = (req, res) => {
 				{ user_id: data.id, email_id },
 				process.env.TOKEN_KEY,
 				{
-					expiresIn: "2h",
+					expiresIn: "6h",
 				}
 			);
 			data.token = token;
+			delete data["password"];
 			res.send(data);
 		}
 	});
@@ -44,17 +45,23 @@ exports.create = (req, res) => {
 exports.findByEmailAndPassword = (req, res) => {
 	const { email_id, password } = req.body;
 	Customer.findByEmailAndPassword(email_id, password, (err, data) => {
-		if (err) err_(res, err.message, "findByEmail");
+		if (err || data.length == 0)
+			err_(res, (err && err.message) || "not Found", "findByEmail");
 		else {
 			data = data[0];
 			const token = jwt.sign(
-				{ customer_id: data.customer_id, email_id: data.email_id, name: data.name },
+				{
+					customer_id: data.customer_id,
+					email_id: data.email_id,
+					name: data.name,
+				},
 				process.env.TOKEN_KEY,
 				{
 					expiresIn: "2h",
 				}
 			);
 			data.token = token;
+			delete data["password"];
 			res.json(data);
 		}
 	});
@@ -62,7 +69,7 @@ exports.findByEmailAndPassword = (req, res) => {
 
 exports.findAll = (req, res) => {
 	Customer.findAll((err, data) => {
-		if (err) err_(res, err.message, "findAll");
+		if (err) err_(res, (err && err.message) || "not Found", "findAll");
 		else res.send(data);
 	});
 };

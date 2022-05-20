@@ -13,16 +13,22 @@ const err_ = (res, message, op, e404 = false) => {
 };
 
 exports.create = (req, res) => {
-	const { customer_id, product_id, quantity, status, placedAt } = req.body;
-	const order = new Order({
-		customer_id,
-        product_id,
-        quantity,
-        status,
-        placedAt
-	});
+	const { orderList } = req.body;
 
-	Order.create(order, (err, data) => {
+	let orderObjects = [];
+	for(x in orderList){
+		const {customer_id, product_id, quantity, status, placedAt} = orderList[x];
+		const orderObject = new Order({
+			customer_id,
+			product_id,
+			quantity,
+			status,
+			placedAt
+		});
+		orderObjects.push(orderObject);
+	}
+
+	Order.create(orderObjects, (err, data) => {
 		if (err) {
 			err_(res, err.message, "creating");
 		} else res.send(data);
@@ -42,6 +48,17 @@ exports.findById = (req, res) => {
 		if (err) {
 			if (err.kind === "Not Found")
 				err_(res, `No product with id: ${product_id}`, "findById", true);
+			else err_(res, err.message);
+		} else res.send(data);
+	});
+};
+
+exports.findBySellerId = (req, res) => {
+	const seller_id = req.params.id;
+	Order.findBySellerId(seller_id, (err, data) => {
+		if (err) {
+			if (err.kind === "Not Found")
+				err_(res, `No product with id: ${seller_id}`, "findById", true);
 			else err_(res, err.message);
 		} else res.send(data);
 	});

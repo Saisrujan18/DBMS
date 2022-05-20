@@ -11,7 +11,7 @@ router.get("/:id", auth,customers.findById);
 
 router.get("/", auth,customers.findAll);
 
-router.get("/update", auth,customers.updateById);
+router.post("/update", auth,customers.updateById);
 
 module.exports = router;
 

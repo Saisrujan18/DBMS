@@ -14,12 +14,14 @@ const ordersRouter = require("./routers/orders.router");
 const customersRouter = require("./routers/customers.router");
 const cartitemsRouter = require("./routers/cartitems.router");
 const authRouter = require("./routers/auth.router")
+const accountRouter = require("./routers/accounts.router");
 
 app.use("/api/products", productsRouter);
 app.use("/api/orders", ordersRouter);
 app.use("/api/customers", customersRouter);
 app.use("/api/cartitems", cartitemsRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/account", accountRouter);
 
 app.listen(PORT, () => {
 	console.log(`Server Listening on Port ${PORT}`);

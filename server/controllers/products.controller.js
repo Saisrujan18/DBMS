@@ -13,14 +13,18 @@ const err_ = (res, message, op, e404 = false) => {
 };
 
 exports.create = (req, res) => {
-	const { name, price, seller_id } = req.body;
-	const product = new Product({
-		name: name,
-		price: price,
-		seller_id: seller_id,
+	const { product } = req.body;
+	const productObj = new Product({
+		name: product.name,
+		price: product.price,
+		description: product.description,
+		seller_id: product.seller_id,
+		imagesrc: product.imagesrc,
+		category: product.category,
+		stock: product.stock
 	});
 
-	Product.create(product, (err, data) => {
+	Product.create(productObj, (err, data) => {
 		if (err) {
 			err_(res, err.message, "creating");
 		} else res.send(data);
@@ -34,6 +38,7 @@ exports.findAll = (req, res) => {
 	});
 };
 
+
 exports.findById = (req, res) => {
 	const product_id = req.params.id;
 	Product.findById(product_id, (err, data) => {
@@ -44,6 +49,17 @@ exports.findById = (req, res) => {
 		} else res.send(data);
 	});
 };
+
+exports.findBySellerId = (req, res) => {
+	const seller_id = req.params.id;
+	Product.findBySellerId(seller_id, (err, data) => {
+		if (err) {
+			if (err.kind === "Not Found")
+				err_(res, `No product with id: ${seller_id}`, "findById", true);
+			else err_(res, err.message);
+		} else res.send(data);
+	})
+}
 
 exports.updateById = (req, res) => {
 	if (!req.body) {

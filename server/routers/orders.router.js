@@ -5,10 +5,12 @@ let router = express.Router();
 
 let orders = require("../controllers/orders.controller");
 
-router.put("/add", auth, orders.create);
+router.post("/add", auth, orders.create);
 
 // customer_id
 router.get("/:id", auth, orders.findById);
+
+router.get("/b/:id", auth, orders.findBySellerId)
 
 router.get("/", auth, orders.findAll);
 

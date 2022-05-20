@@ -19,8 +19,8 @@ Customer.create = (newCustomer, result) => {
 		if (err) {
 			result(err, null);
 		} else {
-			console.log("here", { id: res.insertId, ...newCustomer });
-			result(null, { id: res.insertId, ...newCustomer });
+			console.log("here", { customer_id: res.insertId, ...newCustomer });
+			result(null, { customer_id: res.insertId, ...newCustomer });
 		}
 	});
 };
@@ -62,7 +62,7 @@ Customer.findByEmailAndPassword = (email_id, password, result) => {
 
 Customer.updateById = (customer_id, customer, result) => {
 	let query =
-		"UPDATE customers SET name = ?, email_id = ?, address = ?, phone=? WHERE id=?";
+		"UPDATE customers SET name = ?, email_id = ?, address = ?, phone=? WHERE customer_id=?";
 	db.query(
 		query,
 		[
@@ -74,10 +74,11 @@ Customer.updateById = (customer_id, customer, result) => {
 		],
 		(err, res) => {
 			if (err) {
+				console.log(err);
 				result(err, null);
 			} else {
 				if (res.affectedRows == 0) result({ kind: "not_found" }, null);
-				else result(null, { id: id, ...customer });
+				else result(null, { ...customer });
 			}
 		}
 	);

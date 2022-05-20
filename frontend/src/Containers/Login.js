@@ -1,15 +1,17 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-//TODO: Set icons
 
-function Login({setUserData}) {
+function Login({ setUserData }) {
 	const [email_id, setEmail_id] = useState("");
 	const [password, setPassword] = useState("");
+	const [isSeller, setIsSeller] = useState(false);
+	const [message, setMessage] = useState("");
 	const navigate = useNavigate();
 
 	const handleSubmit = () => {
 		let url = "http://localhost:3002/api/auth/login";
+		if (isSeller) url = "http://localhost:3002/api/auth/b/login";
 		axios
 			.post(url, {
 				email_id: email_id,
@@ -18,9 +20,13 @@ function Login({setUserData}) {
 			.then((res) => {
 				sessionStorage.setItem("user", JSON.stringify(res.data));
 				setUserData(res.data);
-				navigate("/home");
+				if (!isSeller) navigate("/home");
+				else navigate("/profile");
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				setMessage("*Check Email and Password");
+				console.log(err.message);
+			});
 	};
 
 	return (
@@ -141,7 +147,24 @@ function Login({setUserData}) {
 						</div>
 					</div>
 
-					<div className="flex w-full">
+					<div className="flex items-center mb-4">
+						<input
+							id="checkbox-3"
+							aria-describedby="checkbox-3"
+							type="checkbox"
+							className="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded"
+							checked={isSeller}
+							onChange={() => setIsSeller(!isSeller)}
+						/>
+						<label
+							for="checkbox-3"
+							className="text-sm ml-3 font-medium text-gray-900"
+						>
+							Are you a seller?
+						</label>
+					</div>
+
+					<div className="flex w-full flex-col">
 						<button
 							onClick={handleSubmit}
 							className="
@@ -173,6 +196,7 @@ function Login({setUserData}) {
 								</svg>
 							</span>
 						</button>
+						<div className="text-xs p-2 text-red-600">{message}</div>
 					</div>
 				</div>
 			</div>
